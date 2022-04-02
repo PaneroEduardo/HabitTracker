@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="HabitTracker.MainPage"
+             x:Name="Habits">
+
+    <StackLayout>
+        <Frame BackgroundColor="#2196F3" Padding="24" CornerRadius="0">
+            <StackLayout>
+                <Label Text="Día 02 de Abril de 2022" HorizontalTextAlignment="Start" TextColor="White" FontSize="Large"/>
+                <!--<Button Command="{Binding AddHabit}" Text="Insertar" />
+                <Button Command="{Binding SearchUndoneHabits}" Text="Actualizar" />-->
+            </StackLayout>
+        </Frame>
+        <ScrollView>
+            <StackLayout>
+                <Label Text="Undone Habits"  FontSize="Large" FontAttributes="Bold" Margin="20,10,20,5"/>
+                <StackLayout x:Name="undoneHabitsCollectionView" BindableLayout.ItemsSource="{Binding UndoneHabits}" >
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate>
+                        <Frame Padding="20" Margin="20,5,20,5"  CornerRadius="10" Background="#E5E5E5">
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding Source={x:Reference Habits},Path=BindingContext.MarkHabitAsDoneCommand}" CommandParameter="{Binding Id}" NumberOfTapsRequired="2"  />
+                            </Frame.GestureRecognizers>
+                            <StackLayout Orientation="Vertical" >
+                                    <Label Text="{Binding Description}" FontSize="Medium" FontAttributes="Bold"/>
+                                    <Label Text="{Binding Category}" FontSize="Small"/>
+                            </StackLayout>
+                        </Frame>
+                        
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>
+            </StackLayout>
+
+                <Label Text="Done Habits"  FontSize="Large" FontAttributes="Bold" Margin="20,10,20,5"/>
+                <StackLayout x:Name="doneHabitsCollectionView" BindableLayout.ItemsSource="{Binding DoneHabits}" >
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate>
+                            <Frame Padding="20" Margin="20,5,20,5"  CornerRadius="10" Background="#19CC00" >
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding Source={x:Reference Habits},Path=BindingContext.MarkHabitAsDoneCommand}" CommandParameter="{Binding Id}" NumberOfTapsRequired="2"  />
+                                </Frame.GestureRecognizers>
+                                <StackLayout Orientation="Vertical" >
+                                    <Label Text="{Binding Description}" FontSize="Medium" FontAttributes="Bold"/>
+                                    <Label Text="{Binding Category}" FontSize="Small"/>
+                                </StackLayout>
+                            </Frame>
+
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </StackLayout>
+
+            </StackLayout>
+        </ScrollView>
+
+
+    </StackLayout>
+
+</ContentPage>
